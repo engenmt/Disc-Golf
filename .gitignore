@@ -2,7 +2,7 @@
 !.gitignore
 !analyzer.py
 !*/
-!/Figures/
+!/Figures/**.png
 !innova.csv
 !pdga.csv
 !README.md
