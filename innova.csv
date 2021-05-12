@@ -1,108 +1,109 @@
-Firestorm	14	4	-1	3	
-Corvette	14	6	-1	2	
-Colossus	14	5	-1	3	CS
-Vulcan	13	5	-4	2	VU
-Shryke	13	6	-2	2	SY
-Katana	13	5	-3	3	KA
-Groove	13	6	-2	2	GV
-Dominator	13	5	-1	2	DM, DR
-Daedalus	13	6	-3	2	DL
-Boss	13	5	-1	3	BO
-Ape	13	5	0	4	APE
-XCaliber	12	5	0	4	XC
-Wahoo	12	6	-2	2	WA
-Tern	12	6	-3	2	TE
-TeeDevil	12	5	-1	2	DV
-Destroyer	12	5	-1	3	DS, D
-Wraith	11	5	-1	3	WR
-Tee-Rex	11	4	0	4	TR
-Mystere	11	6	-2	2	MY
-Max	11	3	0	5	MAX
-Mamba	11	6	-5	1	MB
-Krait	11	5	-1	2	KR
-Archon	11	5	-2	2	AC
-Starfire	10	4	0	3	SF
-ORC	10	4	-1	3	ORC, O
-Monster	10	3	0	5	MO, M
-Monarch	10	5	-4	1	MC
-Invictus	10	4	0	3	
-Beast	10	5	-2	2	BST
-Viking	9	4	-1	2	VG
-Valkyrie	9	4	-2	2	VL
-Thunderbird	9	5	0	2	TH
-Sidewinder	9	5	-3	1	SW
-Roadrunner	9	5	-4	1	RR
-Firebird L (FL)	9	3	0	2	FL
-Firebird	9	3	0	4	FB
-TL 3	8	4	-1	1	TL3
-Teebird 3	8	4	0	2	T3
-Dragon	8	5	-2	2	DG
-Archangel	8	6	-4	1	AA
-TeeBird L (TL)	7	5	0	1	TL
-TeeBird	7	5	0	2	TB, T
-Leopard 3	7	5	-2	1	L3
-Eagle (new)	7	4	-1	3	EG, E, EX
-Banshee	7	3	0	3	BA, B
-Whippet	6	3	1	5	WH, WX
-Viper	6	4	1	5	VI, V
-Leopard	6	5	-2	1	L
-Gazelle	6	4	0	2	GZ
-Cheetah	6	4	-2	2	CH
-Caiman	5.5	2	0	4	
-Wombat3	5	6	-1	0	WB
-Wombat	5	6	-1	0	WB
-VCobra	5	5	-1	2	VC
-Spider	5	3	0	1	SP
-Skeeter	5	5	-1	1	SK
-Shark 3	5	4	0	2	SH3, SH
-RocX3	5	4	0	3.5	RX3
-Roc 3	5	4	0	3	R3, R
-Panther	5	4	-2	1	PA
-Manta	5	5	-2	1	MN
-Mako 3	5	5	0	0	MK3, MK
-Lion	5	4	0	2	
-Kite	5	6	-3	1	KT, K
-Gator	5	2	0	3	GT
-Foxbat	5	6	-1	0	FT
-CRO	5	3	0	2	CRO
-Avatar	5	4	0	2	
-Atlas	5	4	0	1	
-Wolf	4	3	-4	1	WF, W
-VRoc	4	4	0	1	VR
-Stingray	4	5	-3	1	ST
-Shark	4	4	0	2	SH
-Roc+	4	5	0	2	R+
-Roc	4	4	0	3	R, KCR, OR
-Rat	4	2	0	3	RAT
-Mako	4	5	0	0	MK
-King Cobra	4	5	0	2	CO
-Coyote	4	5	0	1	CY
-Cobra	4	5	-2	2	CO
-Wedge	3.5	3	-3	1	WD, WE
-XD	3	4	-1	1	XD
-Stud	3	3	0	2	SD
-Pig	3	1	0	3	PIG, P
-Mirage	3	4	-3	0	MG
-Invader	3	2	0	1	
-Hydra	3	3	0	2	HY
-Dart	3	4	0	0	DT
-Colt	3	4	-1	1	CL
-Bullfrog	3	1	0	1	
-AviarX3	3	2	0	3	AX3
-Aviar 3	3	2	0	2	AV3
 Aero	3	6	0	0	AE
-Yeti Aviar	2	3	0	1	Ұ
-Whale	2	3	0	1	WL
-Rhyno X	2	1	0	4	
-Rhyno	2	1	0	3	RY
-Nova	2	3	0	0	
-KC Aviar	2	3	0	2	KC
-JK Aviar	2	3	0	2	JK
+Ape	13	5	0	4	APE
+Archangel	8	6	-4	1	AA
+Archon	11	5	-2	2	AC
+Atlas	5	4	0	1	
+Avatar	5	4	0	2	
+Aviar	2	3	0	1	
+Aviar Driver	2	3	0	2	BB
+Aviar3	3	2	0	2	AV3
+AviarX3	3	2	0	3	AX3
+Banshee	7	3	0	3	BA, B
+Beast	10	5	-2	2	BST
+Birdie	1	2	0	0	BD
+Boss	13	5	-1	3	BO
+Bullfrog	3	1	0	1	
+Caiman	5.5	2	0	4	
+Cheetah	6	4	-2	2	CH
 Classic Aviar	2	3	0	0	AV
-Aviar Putter	2	3	0	2	BB
-Aviar	2	3	0	1
-Aviar XD	3	4	-1	1
+Cobra	4	5	-2	2	CO
+Colossus	14	5	-1	3	CS
+Colt	3	4	-1	1	CL
+Corvette	14	6	-1	2	
+Coyote	4	5	0	1	CY
+Cro	5	3	0	2	CRO
+Daedalus	13	6	-3	2	DL
+Dart	3	4	0	0	DT
+Destroyer	12	5	-1	3	DS, D
+Dominator	13	5	-1	2	DM, DR
+Dragon	8	5	-2	2	DG
+Eagle	7	4	-1	3	EG, E, EX
+Firebird	9	3	0	4	FB
+Firestorm	14	4	-1	3	
+FL	9	3	0	2	FL
+Foxbat	5	6	-1	0	FT
+Gator	5	2	0	4	GT
+Gazelle	6	4	0	2	GZ
+Groove	13	6	-2	2	GV
+Hydra	3	3	0	2	HY
+Invader	3	2	0	1	
+Invictus	10	4	0	3	
+JK Aviar	2	3	0	2	JK
+Katana	13	5	-3	3	KA
+KC Aviar	2	3	0	2	KC
+King Cobra	4	5	0	2	CO
+Kite	5	6	-3	1	KT, K
+Krait	11	5	-1	2	KR
+Leopard	6	5	-2	1	L
+Leopard3	7	5	-2	1	L3
+Lion	5	4	0	2	
+Mako	4	5	0	0	MK
+Mako3	5	5	0	0	MK3, MK
+Mamba	11	6	-5	1	MB
+Manta	5	5	-2	1	MN
+Max	11	3	0	5	MAX
+Mirage	3	4	-3	0	MG
+Monarch	10	5	-4	1	MC
+Monster	10	3	0	5	MO, M
+Mystere	11	6	-2	2	MY
+Nova	2	3	0	0	
+Orc	10	4	-1	3	ORC, O
+Panther	5	4	-2	1	PA
+Pig	3	1	0	3	PIG, P
+Polecat	1	3	0	0	PC
+Rat	4	2	0	3	RAT
+Rhyno	2	1	0	3	RY
+RhynoX	2	1	0	4	
+Roadrunner	9	5	-4	1	RR
+Roc	4	4	0	3	R, KCR, OR
+Roc+	4	5	0	2	R+
+Roc3	5	4	0	3	R3, R
+RocX3	5	4	0	3.5	RX3
+Shark	4	4	0	2	SH
+Shark3	5	4	0	2	SH3, SH
+Shryke	13	6	-2	2	SY
+Sidewinder	9	5	-3	1	SW
+Skeeter	5	5	-1	1	SK
 Sonic	1	2	-4	0	
+Spider	5	3	0	1	SP
+Starfire	10	4	0	3	SF
+Stingray	4	5	-3	1	ST
+Stud	3	3	0	2	SD
+TeeBird	7	5	0	2	TB, T
+TeeBird3	8	4	0	2	T3
+TeeDevil	12	5	-1	2	DV
+TeeRex	11	4	0	4	TR
+Tern	12	6	-3	2	TE
+Thunderbird	9	5	0	2	TH
+TL	7	5	-1	1	TL
+TL3	8	4	-1	1	TL3
+Valkyrie	9	4	-2	2	VL
+VCobra	5	5	-1	2	VC
+Viking	9	4	-1	2	VG
+Viper	6	4	1	5	VI, V
+VRoc	4	4	0	1	VR
+Vulcan	13	5	-4	2	VU
+Wahoo	12	6	-2	2	WA
+Wedge	3.5	3	-3	1	WD, WE
+Whale	2	3	0	1	WL
+Whippet	6	3	1	5	WH, WX
+Wolf	4	3	-4	1	WF, W
+Wombat	5	6	-1	0	WB
+Wombat3	5	6	-1	0	WB
+Wraith	11	5	-1	3	WR
+XCaliber	12	5	0	4	XC
+XD	3	4	-1	1	XD
+Yeti Aviar	2	3	0	1	Ұ
 Pole Cat	1	3	0	0	PC
 Birdie	1	2	0	0	BD
 Savant	9	5	-1	2

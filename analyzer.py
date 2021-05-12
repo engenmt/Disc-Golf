@@ -1,12 +1,14 @@
 import matplotlib
 import matplotlib.cm as cm
 import matplotlib.pyplot as pp
+from matplotlib import ticker
 
 matplotlib.rcParams["text.usetex"] = True
 
 import numpy as np
 import pandas as pd
 
+from collections import Counter
 from itertools import combinations
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
@@ -37,6 +39,12 @@ features = {
     "turn": (-5, 2),
     "fade": (0.0, 5.0),
 }
+
+
+def curve_type(degree):
+    return {0: "constant", 1: "linear", 2: "quadratic"}.get(
+        degree, f"degree-${degree}$"
+    )
 
 
 def get_innova_df():
@@ -146,7 +154,7 @@ def make_2d_plot(df, feature_to_predict, degree, cols):
     fig, ax = pp.subplots()
     fig.suptitle(None)
     ax.set_title(
-        f"Predicting {feature_to_predict} with a degree-${degree}$ regression ($R^2 = {score:>6.4f}$)"
+        f"Predicting {feature_to_predict} with a {curve_type(degree)} regression ($R^2 = {score:>6.4f}$)"
     )
     ax.set_xlabel(cols_quantitative[x1])
     ax.set_ylabel(cols_quantitative[x2])
@@ -206,7 +214,7 @@ def analyze_2d(feature_to_predict, degree, threshold=0.9):
 
 def make_1d_plot(df, feature_to_predict, degree, col):
 
-    # Fit model, get score.
+    # Fit model; get score
     model = make_pipeline(PolynomialFeatures(degree=degree), LinearRegression())
     model.fit(df[[col]], df[feature_to_predict])
     score = model.score(df[[col]], df[feature_to_predict])
@@ -214,25 +222,40 @@ def make_1d_plot(df, feature_to_predict, degree, col):
     # Make predictions
     x_min = min(df[col])
     x_max = max(df[col])
-    x_margin = (x_max - x_min) * 0.1
-    x_min -= x_margin
-    x_max += x_margin
     x_plot = np.linspace(x_min, x_max, 50)
     Y = model.predict(x_plot[:, np.newaxis])
+
+    # Compute y-margins
+    y_min, y_max = features[feature_to_predict]
+    y_margin = (y_max - y_min) * 0.05
+    y_min -= y_margin
+    y_max += y_margin
 
     # Set up figure
     fig, ax = pp.subplots()
     fig.suptitle(None)
     ax.set_title(
-        f"Predicting {feature_to_predict} with a degree-${degree}$ regression ($R^2 = {score:>6.4f}$)"
+        f"Predicting {feature_to_predict} with a {curve_type(degree)} regression ($R^2 = {score:>6.4f}$)"
     )
     ax.set_xlabel(cols_quantitative[col])
+    ax.set_xmargin(0.05)
+    ax.yaxis.set_major_locator(ticker.MultipleLocator(1))
     ax.set_ylabel(feature_to_predict.capitalize())
-    ax.margins(0.10)
+    ax.set_ylim(y_min, y_max)
 
+    C = Counter(zip(df[col], df[feature_to_predict]))  # Used for determining opacity
+    alpha = 1 / max(C.values())
+    if col == "rim_config":
+        # The values for rim_config are much more closely located, so we need to
+        # reduce the opacity for clarity
+        alpha /= 2
     # Plot input data
     ax.scatter(
-        df[[col]], df[feature_to_predict], marker="o", edgecolors="black", alpha=0.25
+        df[[col]],
+        df[feature_to_predict],
+        marker="o",
+        edgecolors="black",
+        alpha=alpha,
     )
     # Plot predictions
     ax.plot(x_plot, Y)
