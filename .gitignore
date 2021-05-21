@@ -1,8 +1,11 @@
 *
 !.gitignore
+!loader.py
 !analyzer.py
+!dim-reduce.py
 !*/
 !/Figures/**.png
+!measurements.png
 !innova.csv
 !pdga.csv
 !README.md

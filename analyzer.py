@@ -14,31 +14,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import make_pipeline
 
-cols_aux = [
-    "class",
-    "max_weight_vint",
-    "last_year_prod",
-    "cert_number",
-    "date_approved",
-]
-cols_qualitative = ["manufacturer", "model"]
-cols_quantitative = {
-    "max_weight": "Max. weight (g)",
-    "diameter": "Diameter (cm)",
-    "height": "Height (cm)",
-    "rim_depth": "Rim depth (cm)",
-    "inside_rim_diameter": "Inside rim diameter (cm)",
-    "rim_thickness": "Rim thickness (cm)",
-    "rim_depth_to_diameter": "Rim depth to diameter ratio",
-    "rim_config": "Rim configuration",
-    "flexibility": "Flexibility",
-}
-features = {
-    "speed": (1.0, 14.0),
-    "glide": (0, 7),
-    "turn": (-5, 2),
-    "fade": (0.0, 5.0),
-}
+from loader import get_innova_df, get_innova_df_normalized, cols_quantitative, features
 
 
 def curve_type(degree):
@@ -47,43 +23,9 @@ def curve_type(degree):
     )
 
 
-def get_innova_df():
-    """Return a pd.DataFrame with the PDGA-registered physical features and flight numbers of each Innova disc."""
-    discs_innova = get_df_by_mfr("Innova Champion Discs")
-
-    numbers_innova = pd.read_csv(
-        "innova.csv",
-        names=["model", "speed", "glide", "turn", "fade", "abbreviation"],
-        index_col="model",
-        usecols=["model", "speed", "glide", "turn", "fade"],
-        sep="\t",
-    )
-
-    return discs_innova.join(numbers_innova, how="inner").astype(
-        {feature: "float64" for feature in features}
-    )
-
-
-def get_df_by_mfr(manufacturer):
-    """Return a pd.DataFrame with the PDGA-registered physical features."""
-    pdga = "pdga.csv"
-    discs_all = pd.read_csv(
-        pdga,
-        header=0,
-        names=cols_qualitative + list(cols_quantitative) + cols_aux,
-        usecols=cols_qualitative + list(cols_quantitative),
-    )
-    discs_subset = discs_all[discs_all.manufacturer == manufacturer]
-    discs_subset = discs_subset[["model"] + list(cols_quantitative)]
-    discs_subset.reset_index(drop=True, inplace=True)
-    discs_subset.set_index("model", inplace=True)
-
-    return discs_subset
-
-
 def get_col_subsets(df, cols, feature_to_predict, num_cols, threshold, degree=1):
     """Return the list of column subsets of size `num_cols` whose score for predicting
-    `feature_to_predict` exceed the threshold."""
+    `feature_to_predict` exceed `threshold`."""
 
     col_subsets = []
 
@@ -115,7 +57,7 @@ def get_best_col_subset(df, cols, feature_to_predict, num_cols, degree=1):
             best_score = score
             best_col_subset = col_subset
 
-    return [best_col_subset]
+    return best_col_subset
 
 
 def make_2d_plot(df, feature_to_predict, degree, cols):
@@ -204,9 +146,15 @@ def analyze_2d(feature_to_predict, degree, threshold=0.9):
     )
     if not col_pairs:
         # No pair of columns achieved a score above the threshold
-        col_pairs = get_best_col_subset(
-            df, cols_quantitative, feature_to_predict, num_cols=num_cols, degree=degree
-        )
+        col_pairs = [
+            get_best_col_subset(
+                df,
+                cols_quantitative,
+                feature_to_predict,
+                num_cols=num_cols,
+                degree=degree,
+            )
+        ]
 
     for cols_good in col_pairs:
         make_2d_plot(df, feature_to_predict, degree, cols_good)
@@ -280,9 +228,15 @@ def analyze_1d(feature_to_predict, degree, threshold=0.9):
     )
     if not cols_best:
         # No column achieved a score above the threshold
-        cols_best = get_best_col_subset(
-            df, cols_quantitative, feature_to_predict, num_cols=num_cols, degree=degree
-        )
+        cols_best = [
+            get_best_col_subset(
+                df,
+                cols_quantitative,
+                feature_to_predict,
+                num_cols=num_cols,
+                degree=degree,
+            )
+        ]
 
     for [col] in cols_best:
         make_1d_plot(df, feature_to_predict, degree, col)

@@ -28,12 +28,55 @@ Zephyr           200.0      24.1     2.7  ...                    7.1       83.00
 
 [157 rows x 9 columns]
 ```
+The dataframe is indexed by the name of the disc, and the columns correspond to the 9 physical features registered by the PDGA.
+```python
+>>> for col in sorted(pdga.columns):
+...     print(col)
+... 
+diameter
+flexibility
+height
+inside_rim_diameter
+max_weight
+rim_config
+rim_depth
+rim_depth_to_diameter
+rim_thickness
+```
 
-The flight numbers of Innova discs weren't as easily available as the physical characteristics. We obtained many (106) of them off the [Innova website](https://www.innovadiscs.com/disc-golf-discs/disc-comparison/) and were able to find 21 more through internet searches. These flight numbers are maintained in `innova.csv`.
+The flight numbers of Innova discs weren't as easily available as the physical characteristics. We obtained many (106) of them off the [Innova website](https://www.innovadiscs.com/disc-golf-discs/disc-comparison/) and were able to find 21 more through internet searches. These flight numbers are maintained in `innova.csv`, and a dataframe with both the PDGA-registered features and the flight numbers is made available with `get_innova_df()`:
+```python
+>>> df = get_innova_df()
+>>> df
+           max_weight  diameter  height  rim_depth  ...  speed  glide  turn  fade
+model                                               ...                          
+Ace             175.1      21.1     1.6        1.2  ...    2.0    3.0  -2.0   1.0
+Aero            180.1      21.7     2.5        1.3  ...    3.0    6.0   0.0   0.0
+Animal          176.0      21.2     2.1        1.3  ...    2.0    1.0   0.0   1.0
+Ape             175.1      21.1     1.5        1.2  ...   13.0    5.0   0.0   4.0
+Archangel       175.1      21.1     1.6        1.5  ...    8.0    6.0  -4.0   1.0
+...               ...       ...     ...        ...  ...    ...    ...   ...   ...
+Wombat          180.9      21.8     2.2        1.4  ...    5.0    6.0  -1.0   0.0
+Wombat3         180.9      21.8     2.0        1.4  ...    5.0    6.0  -1.0   0.0
+Wraith          175.1      21.1     1.4        1.2  ...   11.0    5.0  -1.0   3.0
+XCaliber        175.1      21.1     1.6        1.2  ...   12.0    5.0   0.0   4.0
+Zephyr          200.0      24.1     2.7        1.7  ...    2.0    3.0   0.0   0.0
+
+[112 rows x 13 columns]
+```
 
 # Linear Regression
 ## Speed
 
-
+The "speed" of a disc is a measure of how quickly the disc moves through the air. The speed of a disc is relatively well-predicted by the width of the rim of the disc.
 
 ![](Figures/1d/degree-1-speed-rim_thickness.png)
+![](Figures/1d/degree-2-speed-rim_thickness.png)
+
+## Glide
+
+The "glide" of a disc is a measure of how much lift the disc generates and thus how long it will stay airborne. The glide of a disc is not well-explained by any of
+
+![](Figures/1d/degree-1-speed-rim_thickness.png)
+![](Figures/1d/degree-2-speed-rim_thickness.png)
+
