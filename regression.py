@@ -10,7 +10,7 @@ import pandas as pd
 
 from collections import Counter
 from itertools import combinations
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, ElasticNet
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import make_pipeline
 

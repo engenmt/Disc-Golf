@@ -146,11 +146,12 @@ def make_methods_plot():
 
 
 if __name__ == "__main__":
-
+    # df = get_innova_df_normalized()
+    df = get_innova_df_normalized(include_max_weight=False)
     # make_LLE_methods_plot()
     # make_LLE_neighbors_plot()
     # make_isomap_plot()
     # make_pca_plot()
     # make_tsne_plot()
     # make_spectral_plot()
-    make_methods_plot()
+    # make_methods_plot()

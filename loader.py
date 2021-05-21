@@ -33,7 +33,7 @@ features = {
 }
 
 
-def get_innova_df():
+def get_innova_df(include_max_weight=True):
     """Return a pd.DataFrame with the PDGA-registered physical features and flight numbers of each Innova disc."""
     discs_innova = get_df_by_mfr("Innova Champion Discs")
 
@@ -44,6 +44,8 @@ def get_innova_df():
         usecols=["model", "speed", "glide", "turn", "fade"],
         sep="\t",
     )
+    if not include_max_weight:
+        discs_innova = discs_innova.drop(columns="max_weight")
 
     numbers_innova["stability"] = numbers_innova["turn"] + numbers_innova["fade"]
 
@@ -52,8 +54,13 @@ def get_innova_df():
     )
 
 
-def get_innova_df_normalized():
-    df = get_innova_df().copy(deep=True)
+def get_innova_df_normalized(**kwargs):
+    """Return the Innova dataframe with quantitative values between 0 and 1."""
+    return normalize_df(get_innova_df(**kwargs).copy(deep=True))
+
+
+def normalize_df(df):
+    """Given a dataframe with quantitative columns, normalize them to lie between 0 and 1."""
     for col in df.columns:
         col_min = min(df[col])
         col_max = max(df[col])
@@ -79,5 +86,7 @@ def get_df_by_mfr(manufacturer):
 
 
 if __name__ == "__main__":
-    df = get_innova_df()
-    # df = get_innova_df_normalized()
+    # df = get_innova_df()
+
+    df = get_innova_df_normalized()
+    df = get_innova_df_normalized(include_max_weight=False)
