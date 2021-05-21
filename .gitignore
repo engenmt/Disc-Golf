@@ -1,8 +1,9 @@
 *
 !.gitignore
 !loader.py
-!analyzer.py
-!dim-reduce.py
+!regression.py
+!dim_reduce.py
+!notebook.ipynb
 !*/
 !/Figures/**.png
 !measurements.png
