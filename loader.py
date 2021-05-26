@@ -1,9 +1,4 @@
-import numpy as np
 import pandas as pd
-
-from collections import Counter
-from itertools import combinations
-
 
 cols_aux = [
     "class",
@@ -33,7 +28,7 @@ features = {
 }
 
 
-def get_innova_df(include_max_weight=True):
+def get_df_innova(include_max_weight=True, include_stability=False):
     """Return a pd.DataFrame with the PDGA-registered physical features and flight numbers of each Innova disc."""
     discs_innova = get_df_by_mfr("Innova Champion Discs")
 
@@ -45,22 +40,21 @@ def get_innova_df(include_max_weight=True):
         sep="\t",
     )
     if not include_max_weight:
-        discs_innova = discs_innova.drop(columns="max_weight")
+        discs_innova.drop(columns="max_weight", inplace=True)
 
-    numbers_innova["stability"] = numbers_innova["turn"] + numbers_innova["fade"]
+    if include_stability:
+        numbers_innova["stability"] = numbers_innova["turn"] + numbers_innova["fade"]
+    else:
+        del features["stability"]
 
     return discs_innova.join(numbers_innova, how="inner").astype(
         {feature: "float64" for feature in features}
     )
 
 
-def get_innova_df_normalized(**kwargs):
-    """Return the Innova dataframe with quantitative values between 0 and 1."""
-    return normalize_df(get_innova_df(**kwargs).copy(deep=True))
-
-
 def normalize_df(df):
     """Given a dataframe with quantitative columns, normalize them to lie between 0 and 1."""
+    df = df.copy(deep=True)
     for col in df.columns:
         col_min = min(df[col])
         col_max = max(df[col])
@@ -70,6 +64,16 @@ def normalize_df(df):
 
 def get_df_by_mfr(manufacturer):
     """Return a pd.DataFrame with the PDGA-registered physical features."""
+    discs_all = get_df_pdga().dropna()
+    discs_subset = discs_all[discs_all.manufacturer == manufacturer]
+    discs_subset = discs_subset[["model"] + list(cols_quantitative)]
+    discs_subset.reset_index(drop=True, inplace=True)
+    discs_subset.set_index("model", inplace=True)
+    return discs_subset.sort_index()
+
+
+def get_df_pdga():
+    """Return a pd.DataFrame with all PDGA-registered discs."""
     pdga = "pdga.csv"
     discs_all = pd.read_csv(
         pdga,
@@ -77,16 +81,18 @@ def get_df_by_mfr(manufacturer):
         names=cols_qualitative + list(cols_quantitative) + cols_aux,
         usecols=cols_qualitative + list(cols_quantitative),
     )
-    discs_subset = discs_all[discs_all.manufacturer == manufacturer]
-    discs_subset = discs_subset[["model"] + list(cols_quantitative)]
-    discs_subset.reset_index(drop=True, inplace=True)
-    discs_subset.set_index("model", inplace=True)
+    return discs_all
 
-    return discs_subset
+
+def get_df_pdga_quantitative():
+    """Return a pd.DataFrame with all PDGA-registered discs and their quantitative features."""
+    discs_all = get_df_pdga().dropna()
+    discs_all.reset_index(drop=True, inplace=True)
+    discs_all.set_index(cols_qualitative, inplace=True)
+    return discs_all.sort_index()
 
 
 if __name__ == "__main__":
-    # df = get_innova_df()
-
-    df = get_innova_df_normalized()
-    df = get_innova_df_normalized(include_max_weight=False)
+    df = get_df_by_mfr("Innova Champion Discs")
+    # df = get_df_pdga()
+    # df = normalize_df(get_df_innova(include_max_weight=False))

@@ -14,7 +14,7 @@ from sklearn.linear_model import LinearRegression, ElasticNet
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import make_pipeline
 
-from loader import get_innova_df, get_innova_df_normalized, cols_quantitative, features
+from loader import get_df_innova, cols_quantitative, features
 
 
 def curve_type(degree):
@@ -133,7 +133,7 @@ def make_2d_plot(df, feature_to_predict, degree, cols):
 
 
 def analyze_2d(feature_to_predict, degree, threshold=0.9):
-    df = get_innova_df()
+    df = get_df_innova()
 
     num_cols = 2
     col_pairs = get_col_subsets(
@@ -215,7 +215,7 @@ def make_1d_plot(df, feature_to_predict, degree, col):
 
 def analyze_1d(feature_to_predict, degree, threshold=0.9):
 
-    df = get_innova_df()
+    df = get_df_innova()
 
     num_cols = 1
     cols_best = get_col_subsets(
@@ -243,14 +243,10 @@ def analyze_1d(feature_to_predict, degree, threshold=0.9):
 
 
 def analyze(feature_to_predict, degree):
-    df = get_innova_df()
-    print(f"\nPredicting {feature_to_predict} with a degree-{degree} regression.")
-
+    df = get_df_innova()
     model = make_pipeline(PolynomialFeatures(degree=degree), LinearRegression())
     model.fit(df[cols_quantitative], df[feature_to_predict])
-    score = model.score(df[cols_quantitative], df[feature_to_predict])
-
-    print(f"Score = {score}\n")
+    return model.score(df[cols_quantitative], df[feature_to_predict])
 
 
 if __name__ == "__main__":
@@ -259,6 +255,6 @@ if __name__ == "__main__":
     for degree in [1, 2]:
         for feature_to_predict in features:
             print(f"Predicting {feature_to_predict} with a degree-{degree} regression.")
-            analyze(feature_to_predict, degree=degree)
+            print(f"Score = {analyze(feature_to_predict, degree=degree)}")
             analyze_1d(feature_to_predict, degree=degree, threshold=threshold)
             analyze_2d(feature_to_predict, degree=degree, threshold=threshold)

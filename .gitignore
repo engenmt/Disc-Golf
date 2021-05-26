@@ -1,6 +1,7 @@
 *
 !.gitignore
 !loader.py
+!correlations.py
 !regression.py
 !dim_reduce.py
 !notebook.ipynb
